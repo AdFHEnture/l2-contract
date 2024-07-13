@@ -19,7 +19,7 @@ task("create-ad", "Creates a new ad")
       taskArgs.content,
       taskArgs.duration,
       vector,
-      taskArgs.recipient
+      taskArgs.recipient,
       { value: hre.ethers.parseEther((taskArgs.duration * 0.01).toString()) }
 
     );
