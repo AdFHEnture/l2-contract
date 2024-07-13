@@ -8,7 +8,7 @@ dataSources:
     name: AdContract
     network: scroll-sepolia
     source:
-      address: "0xc9f8f36AAd4aB3336E17FE37FcFd1EfADe5d7205"
+      address: "0xaDFD90Ec12Bf1c43c429623A03a4B5123a746495"
       abi: AdContract
       startBlock: 5452913
     mapping:
@@ -21,6 +21,6 @@ dataSources:
         - name: AdContract
           file: ./abis/AdContract.json
       eventHandlers:
-        - event: AdCreated(indexed uint256,indexed address,string,uint256,uint256)
+        - event: AdCreated(indexed uint256,indexed address,string,uint256,uint256,bool[5])
           handler: handleAdCreated
       file: ./src/ad-contract.ts
