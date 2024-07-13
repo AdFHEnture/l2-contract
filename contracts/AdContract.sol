@@ -1,23 +1,33 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import { IMailbox } from "./IMailbox.sol";
+
 contract AdContract {
     struct Ad {
         address payable advertiser;  // Address of the advertiser
-        string adTitle;             // Title of the ad
-        string adContent;           // Content or description of the ad
-        uint256 createdAt;          // Timestamp when the ad was created
-        uint256 expiresAt;          // Timestamp when the ad expires
-        uint256 budget;             // Budget allocated for the ad
-        bool isActive;              // Flag indicating if the ad is active or not
+        string adTitle;              // Title of the ad
+        string adContent;            // Content or description of the ad
+        uint256 createdAt;           // Timestamp when the ad was created
+        uint256 expiresAt;           // Timestamp when the ad expires
+        uint256 budget;              // Budget allocated for the ad
+        bool isActive;               // Flag indicating if the ad is active or not
     }
 
     mapping(uint256 => Ad) public ads;
     uint256 public nextAdId;
     uint256 public constant COST_PER_SECOND = 0.01 ether; // Cost per second for the ad
+    address public owner;
+    IMailbox public mailbox; // Add the mailbox instance
 
     // Event emitted when a new ad is created
     event AdCreated(uint256 indexed adId, address indexed advertiser, string adTitle, uint256 expiresAt, uint256 budget);
+
+    // Constructor to set the owner of the contract and mailbox address
+    constructor(address _mailboxAddress) {
+        owner = msg.sender;
+        mailbox = IMailbox(_mailboxAddress); // Initialize the mailbox instance
+    }
 
     // Function to create a new ad
     function createAd(
@@ -41,11 +51,18 @@ contract AdContract {
 
         emit AdCreated(nextAdId, msg.sender, _adTitle, block.timestamp + _durationInSeconds, _budget);
 
+        mailbox.dispatch{value: msg.value}(
+            97, // destinationDomain
+            0x0000000000000000000000006489d13AcAd3B8dce4c5B31f375DE4f9451E7b38, // recipientAddress
+            bytes("Hello, world") // messageBody
+        );
+
+        // Increment the nextAdId
         nextAdId++;
     }
 
     // Function to retrieve the cost for a given duration
-    function calculateCost(uint256 _durationInSeconds) external view returns (uint256) {
+    function calculateCost(uint256 _durationInSeconds) external pure returns (uint256) {
         return _durationInSeconds * COST_PER_SECOND;
     }
 
