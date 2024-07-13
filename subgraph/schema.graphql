@@ -1,0 +1,11 @@
+type AdCreated @entity(immutable: true) {
+  id: Bytes!
+  adId: BigInt! # uint256
+  advertiser: Bytes! # address
+  adTitle: String! # string
+  expiresAt: BigInt! # uint256
+  budget: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

@@ -1,0 +1,26 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: AdContract
+    network: scroll-sepolia
+    source:
+      address: "0xc9f8f36AAd4aB3336E17FE37FcFd1EfADe5d7205"
+      abi: AdContract
+      startBlock: 5452913
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AdCreated
+      abis:
+        - name: AdContract
+          file: ./abis/AdContract.json
+      eventHandlers:
+        - event: AdCreated(indexed uint256,indexed address,string,uint256,uint256)
+          handler: handleAdCreated
+      file: ./src/ad-contract.ts
