@@ -5,13 +5,11 @@ import {IMailbox} from "./IMailbox.sol";
 
 contract AdContract {
     struct Ad {
-        address payable advertiser; // Address of the advertiser
-        string adTitle; // Title of the ad
-        string adContent; // Content or description of the ad
-        uint256 createdAt; // Timestamp when the ad was created
-        uint256 expiresAt; // Timestamp when the ad expires
-        uint256 budget; // Budget allocated for the ad
-        bool isActive; // Flag indicating if the ad is active or not
+        address payable advertiser;
+        string websiteUrl;
+        string imageUrl;
+        uint256 createdAt;
+        uint256 expiresAt;
         bool[5] adVector;
     }
 
@@ -22,54 +20,73 @@ contract AdContract {
     IMailbox public mailbox;
     uint32 destinationChain;
 
-    // Event emitted when a new ad is created
     event AdCreated(
         uint256 indexed adId,
         address indexed advertiser,
-        string adTitle,
+        string websiteUrl,
+        string imageUrl,
         uint256 expiresAt,
-        uint256 budget
+        bool[5] adVector,
+        bytes32 channelMessageId,
+        address recipient,
+        uint32 destinationChain
     );
 
-    constructor(address _mailboxAddress) {
+    constructor(address mailboxAddress, uint32 _destinationChain) {
         owner = msg.sender;
-        mailbox = IMailbox(_mailboxAddress); // Initialize the mailbox instance
+        mailbox = IMailbox(mailboxAddress);
+        destinationChain = _destinationChain;
     }
 
     receive() external payable {}
 
-    // Function to create a new ad
     function createAd(
-        string memory _adTitle,
-        string memory _adContent,
-        uint256 _durationInSeconds,
-        uint256 _budget,
-        bool[5] memory _adVector
+        string memory websiteUrl,
+        string memory imageUrl,
+        uint256 durationInSeconds,
+        bool[5] memory adVector,
+        address recipient
     ) external payable returns (bytes32) {
-        uint256 cost = _durationInSeconds * COST_PER_SECOND;
-        require(msg.value >= cost, "Insufficient payment for the ad duration");
-
-        ads[nextAdId] = Ad({
+        // uint256 cost = durationInSeconds * COST_PER_SECOND;
+        //require(msg.value >= cost, "Insufficient payment for the ad duration");
+        Ad memory ad = Ad({
             advertiser: payable(msg.sender),
-            adTitle: _adTitle,
-            adContent: _adContent,
+            websiteUrl: websiteUrl,
+            imageUrl: imageUrl,
             createdAt: block.timestamp,
-            expiresAt: block.timestamp + _durationInSeconds,
-            budget: _budget,
-            isActive: true,
-            adVector: _adVector
+            expiresAt: block.timestamp + durationInSeconds,
+            adVector: adVector
         });
+        ads[nextAdId] = ad;
+
+        bytes memory adBytesArray = new bytes(ad.adVector.length);
+        for (uint i = 0; i < ad.adVector.length; i++) {
+            if (ad.adVector[i]) {
+                adBytesArray[i] = 0x01;
+            } else {
+                adBytesArray[i] = 0x00;
+            }
+        }
+
+        bytes32 channelMessageId = mailbox.dispatch{value: msg.value}(
+            destinationChain, // destinationDomain
+            bytes32(uint256(uint160(recipient))), // recipientAddress
+            bytes(adBytesArray) // messageBody
+        );
 
         emit AdCreated(
             nextAdId,
             msg.sender,
-            _adTitle,
-            block.timestamp + _durationInSeconds,
-            _budget
+            websiteUrl,
+            imageUrl,
+            block.timestamp + durationInSeconds,
+            adVector,
+            channelMessageId,
+            recipient,
+            destinationChain
         );
 
         nextAdId++;
-        return bytes32(nextAdId - 1);
+        return channelMessageId;
     }
-
 }
