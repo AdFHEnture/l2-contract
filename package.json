@@ -7,6 +7,7 @@
     "clean": "rimraf ./artifacts ./cache ./coverage ./types ./coverage.json",
     "compile": "hardhat compile",
     "deploy": "hardhat deploy",
+    "task:createAd": "hardhat task:createAd",
     "task:addCount": "hardhat task:addCount",
     "task:getCount": "hardhat task:getCount",
     "task:getFunds": "hardhat task:getFunds"

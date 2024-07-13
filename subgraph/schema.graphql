@@ -5,6 +5,7 @@ type AdCreated @entity(immutable: true) {
   adTitle: String! # string
   expiresAt: BigInt! # uint256
   budget: BigInt! # uint256
+  adVector: [Boolean!]! # bool[]
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

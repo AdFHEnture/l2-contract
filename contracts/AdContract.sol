@@ -28,44 +28,46 @@ contract AdContract {
         address indexed advertiser,
         string adTitle,
         uint256 expiresAt,
-        uint256 budget
+        uint256 budget,
+        bool[5] adVector
     );
 
-    constructor(address _mailboxAddress) {
+    constructor(address mailboxAddress) {
         owner = msg.sender;
-        mailbox = IMailbox(_mailboxAddress); // Initialize the mailbox instance
+        mailbox = IMailbox(mailboxAddress); // Initialize the mailbox instance
     }
 
     receive() external payable {}
 
     // Function to create a new ad
     function createAd(
-        string memory _adTitle,
-        string memory _adContent,
-        uint256 _durationInSeconds,
-        uint256 _budget,
-        bool[5] memory _adVector
+        string memory adTitle,
+        string memory adContent,
+        uint256 durationInSeconds,
+        uint256 budget,
+        bool[5] memory adVector
     ) external payable returns (bytes32) {
-        uint256 cost = _durationInSeconds * COST_PER_SECOND;
+        uint256 cost = durationInSeconds * COST_PER_SECOND;
         require(msg.value >= cost, "Insufficient payment for the ad duration");
 
         ads[nextAdId] = Ad({
             advertiser: payable(msg.sender),
-            adTitle: _adTitle,
-            adContent: _adContent,
+            adTitle: adTitle,
+            adContent: adContent,
             createdAt: block.timestamp,
-            expiresAt: block.timestamp + _durationInSeconds,
-            budget: _budget,
+            expiresAt: block.timestamp + durationInSeconds,
+            budget: budget,
             isActive: true,
-            adVector: _adVector
+            adVector: adVector
         });
 
         emit AdCreated(
             nextAdId,
             msg.sender,
-            _adTitle,
-            block.timestamp + _durationInSeconds,
-            _budget
+            adTitle,
+            block.timestamp + durationInSeconds,
+            budget,
+            adVector
         );
 
         nextAdId++;
