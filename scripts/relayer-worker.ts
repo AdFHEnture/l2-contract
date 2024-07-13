@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import { exec } from 'child_process';
 dotenv.config();
 
-const provider = new ethers.JsonRpcProvider("https://scroll-public.scroll-testnet.quiknode.pro");
+const provider = new ethers.JsonRpcProvider("https://rpc.ankr.com/scroll_sepolia_testnet");
 
 const contractAddress = process.env.MAILBOX_ADDRESS || "";
 const privateKey = process.env.PRIVATE_KEY || "";
