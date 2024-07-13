@@ -68,12 +68,12 @@ interface IMailbox {
         bytes calldata messageBody
     ) external view returns (uint256 fee);
 
-    function dispatch(
-        uint32 destinationDomain,
-        bytes32 recipientAddress,
-        bytes calldata body,
-        bytes calldata defaultHookMetadata
-    ) external payable returns (bytes32 messageId);
+    // function dispatch(
+    //     uint32 destinationDomain,
+    //     bytes32 recipientAddress,
+    //     bytes calldata body,
+    //     bytes calldata defaultHookMetadata
+    // ) external payable returns (bytes32 messageId);
 
     function quoteDispatch(
         uint32 destinationDomain,
@@ -82,13 +82,13 @@ interface IMailbox {
         bytes calldata defaultHookMetadata
     ) external view returns (uint256 fee);
 
-    function dispatch(
-        uint32 destinationDomain,
-        bytes32 recipientAddress,
-        bytes calldata body,
-        bytes calldata customHookMetadata,
-        IPostDispatchHook customHook
-    ) external payable returns (bytes32 messageId);
+    // function dispatch(
+    //     uint32 destinationDomain,
+    //     bytes32 recipientAddress,
+    //     bytes calldata body,
+    //     bytes calldata customHookMetadata,
+    //     IPostDispatchHook customHook
+    // ) external payable returns (bytes32 messageId);
 
     function quoteDispatch(
         uint32 destinationDomain,
