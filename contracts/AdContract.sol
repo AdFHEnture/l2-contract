@@ -26,7 +26,7 @@ contract AdContract {
     // uint256 public constant COST_PER_SECOND = 0.01 ether; // Cost per second for the ad
     address public owner;
     IMailbox public mailbox; // Add the mailbox instance
-    address destinationChain;
+    uint32 destinationChain;
 
     // // Event emitted when a new ad is created
     // event AdCreated(
@@ -42,7 +42,7 @@ contract AdContract {
         string adTitle,
         bool[5] adVector,
         bytes32 messageId,
-        address destinationChain
+        uint32 destinationChain
     );
 
     // Constructor to set the owner of the contract and mailbox address
@@ -51,7 +51,7 @@ contract AdContract {
         mailbox = IMailbox(_mailboxAddress); // Initialize the mailbox instance
     }
 
-    function miniCooper(address recipient) public returns (bytes32) {
+    function miniCooper(address recipient) public payable returns (bytes32) {
         miniCooperAd memory somini = miniCooperAd({
             advertiser: payable(msg.sender),
             adTitle: "$MiniCooper",
@@ -74,9 +74,9 @@ contract AdContract {
         );
 
         emit MiniCooperAdCreated(
-            miniCooperAd.advertiser,
-            miniCooperAd.adTitle,
-            miniCooperAd.adVector,
+            somini.advertiser,
+            somini.adTitle,
+            somini.adVector,
             id,
             destinationChain
         );
