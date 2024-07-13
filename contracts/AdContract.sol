@@ -6,8 +6,8 @@ import {IMailbox} from "./IMailbox.sol";
 contract AdContract {
     struct Ad {
         address payable advertiser;
-        string adTitle;
-        string adContent;
+        string websiteUrl;
+        string imageUrl;
         uint256 createdAt;
         uint256 expiresAt;
         bool[5] adVector;
@@ -23,7 +23,8 @@ contract AdContract {
     event AdCreated(
         uint256 indexed adId,
         address indexed advertiser,
-        string adTitle,
+        string websiteUrl,
+        string imageUrl,
         uint256 expiresAt,
         bool[5] adVector,
         bytes32 channelMessageId,
@@ -40,18 +41,18 @@ contract AdContract {
     receive() external payable {}
 
     function createAd(
-        string memory adTitle,
-        string memory adContent,
+        string memory websiteUrl,
+        string memory imageUrl,
         uint256 durationInSeconds,
         bool[5] memory adVector,
         address recipient
     ) external payable returns (bytes32) {
-        uint256 cost = durationInSeconds * COST_PER_SECOND;
+        // uint256 cost = durationInSeconds * COST_PER_SECOND;
         //require(msg.value >= cost, "Insufficient payment for the ad duration");
         Ad memory ad = Ad({
             advertiser: payable(msg.sender),
-            adTitle: adTitle,
-            adContent: adContent,
+            websiteUrl: websiteUrl,
+            imageUrl: imageUrl,
             createdAt: block.timestamp,
             expiresAt: block.timestamp + durationInSeconds,
             adVector: adVector
@@ -76,7 +77,8 @@ contract AdContract {
         emit AdCreated(
             nextAdId,
             msg.sender,
-            adTitle,
+            websiteUrl,
+            imageUrl,
             block.timestamp + durationInSeconds,
             adVector,
             channelMessageId,

@@ -5,6 +5,11 @@
         "internalType": "address",
         "name": "mailboxAddress",
         "type": "address"
+      },
+      {
+        "internalType": "uint32",
+        "name": "_destinationChain",
+        "type": "uint32"
       }
     ],
     "stateMutability": "nonpayable",
@@ -28,7 +33,13 @@
       {
         "indexed": false,
         "internalType": "string",
-        "name": "adTitle",
+        "name": "websiteUrl",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "imageUrl",
         "type": "string"
       },
       {
@@ -39,15 +50,27 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "budget",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
         "internalType": "bool[5]",
         "name": "adVector",
         "type": "bool[5]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "channelMessageId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "destinationChain",
+        "type": "uint32"
       }
     ],
     "name": "AdCreated",
@@ -83,12 +106,12 @@
       },
       {
         "internalType": "string",
-        "name": "adTitle",
+        "name": "websiteUrl",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "adContent",
+        "name": "imageUrl",
         "type": "string"
       },
       {
@@ -100,16 +123,6 @@
         "internalType": "uint256",
         "name": "expiresAt",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "budget",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "isActive",
-        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -119,12 +132,12 @@
     "inputs": [
       {
         "internalType": "string",
-        "name": "adTitle",
+        "name": "websiteUrl",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "adContent",
+        "name": "imageUrl",
         "type": "string"
       },
       {
@@ -133,14 +146,14 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "budget",
-        "type": "uint256"
-      },
-      {
         "internalType": "bool[5]",
         "name": "adVector",
         "type": "bool[5]"
+      },
+      {
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
       }
     ],
     "name": "createAd",
