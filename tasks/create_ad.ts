@@ -20,12 +20,13 @@ task("create-ad", "Creates a new ad")
       taskArgs.duration,
       vector,
       taskArgs.recipient,
-      { value: hre.ethers.parseEther((taskArgs.duration * 0.01).toString()) }
+      //(taskArgs.duration * 0.01).toString()
+      { value: hre.ethers.parseEther('0') }
 
     );
 
     await tx.wait();
-    console.log("Ad created:", tx.hash);
+    console.log("Ad create  d:", tx.hash);
   });
 
 module.exports = {};

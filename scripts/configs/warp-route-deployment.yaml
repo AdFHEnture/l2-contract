@@ -1,0 +1,43 @@
+fhenix:
+  interchainSecurityModule:
+    modules:
+      - relayer: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+        type: trustedRelayerIsm
+      - domains: {}
+        owner: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+        type: defaultFallbackRoutingIsm
+    threshold: 1
+    type: staticAggregationIsm
+  isNft: false
+  mailbox: "0xF0FB4Ea7a5E1dacD1ae013146BC753A430d5A324"
+  owner: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+  type: native
+scrollsepolia:
+  interchainSecurityModule:
+    modules:
+      - relayer: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+        type: trustedRelayerIsm
+      - domains: {}
+        owner: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+        type: defaultFallbackRoutingIsm
+    threshold: 1
+    type: staticAggregationIsm
+  isNft: false
+  mailbox: "0xCc4F801397dC53657193c8192FF47425e2312f2E"
+  owner: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+  type: native
+zircuit:
+  interchainSecurityModule:
+    modules:
+      - relayer: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+        type: trustedRelayerIsm
+      - domains: {}
+        owner: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+        type: defaultFallbackRoutingIsm
+    threshold: 1
+    type: staticAggregationIsm
+  isNft: false
+  mailbox: "0xF0FB4Ea7a5E1dacD1ae013146BC753A430d5A324"
+  owner: "0xccE9Ca3870bCDb21C353603C7b5ABaDd5BaEeA56"
+  type: native
+
