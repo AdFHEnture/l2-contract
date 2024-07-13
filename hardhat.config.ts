@@ -9,6 +9,11 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    fhenixTestnet: {
+      url: "https://api.testnet.fhenix.zone:7747",
+      accounts:
+      process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    }
   },
 };
 
