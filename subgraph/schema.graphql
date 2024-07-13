@@ -1,12 +1,20 @@
 type AdCreated @entity(immutable: true) {
   id: Bytes!
   adId: BigInt! # uint256
-  advertiser: Bytes! # address
-  adTitle: String! # string
+  advertiser: Advertiser! # Refers to Advertiser entity
+  websiteUrl: String! # string
+  imageUrl: String! # string
   expiresAt: BigInt! # uint256
-  budget: BigInt! # uint256
   adVector: [Boolean!]! # bool[]
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+}
+
+type Advertiser @entity(immutable: false) {
+  id: Bytes!
+  wallet: Bytes! # address
+  totalPaid: BigInt! # uint256
+  interests: [BigInt!]! # uint256[]
+  ads: [AdCreated!]! @derivedFrom(field: "advertiser")
 }
