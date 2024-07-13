@@ -6,7 +6,7 @@ task("create-ad", "Creates a new ad")
   .addParam("title", "The title of the ad")
   .addParam("content", "The content of the ad")
   .addParam("duration", "The duration of the ad in seconds")
-  .addParam("budget", "The budget for the ad")
+  .addParam("recipient", "The recipient address on the destination chain")
   .addParam("vector", "The ad vector (comma-separated booleans)")
   .setAction(async (taskArgs, hre) => {
     const [deployer] = await hre.ethers.getSigners();
@@ -18,9 +18,10 @@ task("create-ad", "Creates a new ad")
       taskArgs.title,
       taskArgs.content,
       taskArgs.duration,
-      taskArgs.budget,
       vector,
+      taskArgs.recipient
       { value: hre.ethers.parseEther((taskArgs.duration * 0.01).toString()) }
+
     );
 
     await tx.wait();
