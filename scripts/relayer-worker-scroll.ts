@@ -16,7 +16,7 @@ const contract = new ethers.Contract(contractAddress, iface, provider);
 
 console.log("🏁 Worker started listening")
 contract.on("DispatchId", (id) => {
-    console.log("🤠 DispatchId:", id);
+    console.log("🤠 DispatchId:", id); // TODO: Add time
 
     const command = `hyperlane status --relay --id ${id} --origin scrollsepolia --destination fhenix --registry ./scripts/hyperlane-registry -k ${privateKey}`;
     exec(command, (error, stdout, stderr) => {

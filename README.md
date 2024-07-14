@@ -89,8 +89,9 @@ Default (Hyperlane CLI)
 # Technical Documentation
 
 1- Deploying origin and destination chain contracts
-Scroll Origin: 0x8b15E115bfaEFC31402f595fe94d056Da6042344
-Fhenix Destination: 0xEFB2A0589CEC7E3aB17Dd00b44C820C66FCf0BBc
+Scroll Origin: 0x8b15E115bfaEFC31402f595fe94d056Da6042344 (not updated)
+Zircuit Origin: 0xd519cd8178098f00917CCc634728Eb3EeD164fac
+Fhenix Destination: 0x0D6Ae73E89865aD480E4D4bFA19CB064CE23f7a9
 
 
 2- Origin contract verification on block explorer for ease of use

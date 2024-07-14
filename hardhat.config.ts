@@ -33,11 +33,17 @@ const config: HardhatUserConfig = {
       chainId: 59140,
       accounts: [private_key],
     },
+    zircuit_testnet: {
+      url: `https://zircuit1.p2pify.com`,
+      chainId:  48899,
+      accounts: [private_key]
+    }
   },
   etherscan: {
     apiKey: {
       scroll_testnet: process.env.SCROLL_SCAN_API_KEY || "",
       fhenix_testnet: process.env.SCAN_API_KEY || "",
+      zircuit_testnet: process.env.ZIRCUIT_SCAN_API_KEY || ""
     },
     customChains: [
       {
@@ -63,6 +69,14 @@ const config: HardhatUserConfig = {
           apiURL: "https://api.helium.fhenix.zone",
           browserURL: "https://explorer.helium.fhenix.zone",
         },
+      },
+      {
+        network: "zircuit_testnet",
+        chainId: 48899,
+        urls: {
+          apiURL: "https://explorer.zircuit.com/api/contractVerifyHardhat",
+          browserURL: "https://explorer.zircuit.com/"
+        }
       }
     ],
   },
