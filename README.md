@@ -1,8 +1,8 @@
 # Hyperlane Deployments
-
 [Deploy Hyperlane to a new chain](https://docs.hyperlane.xyz/docs/deploy-hyperlane)
 
-## Fhenix (Testnet)
+# Testnets
+## 1) Fhenix-Testnet
 ### Addresses
 ```
 staticMerkleRootMultisigIsmFactory: "0x056193A177b779254B224c8a5acB29dD2879afd9"
@@ -38,7 +38,7 @@ blockExplorers:
     name: Blockscout
     url: https://explorer.helium.fhenix.zone/
  ```
-## Zircuit (Testnet)
+## 2) Zircuit-Testnet
 ### Addresses
 ```
 staticMerkleRootMultisigIsmFactory: "0x056193A177b779254B224c8a5acB29dD2879afd9"
@@ -68,7 +68,7 @@ nativeToken:
   decimals: 18
 ```
 
-## Scroll (Testnet)
+## 3) Scroll-Testnet
 ### Addresses
 ```
 staticMerkleRootMultisigIsmFactory: "0xaE99c876be5a81c19F76e6539Bf16aE0ca4d2B48"
@@ -88,25 +88,31 @@ Default (Hyperlane CLI)
 
 # Technical Documentation
 
-1- Deploying origin and destination chain contracts
-Scroll Origin: 0x8b15E115bfaEFC31402f595fe94d056Da6042344 (not updated)
-Zircuit Origin: 0xd519cd8178098f00917CCc634728Eb3EeD164fac
-Fhenix Destination: 0x0D6Ae73E89865aD480E4D4bFA19CB064CE23f7a9
+**_1- Deploying origin and destination chain contracts_**
+
+**Scroll Origin**: 0x8b15E115bfaEFC31402f595fe94d056Da6042344 (not updated)
+
+**Zircuit Origin**: 0xd519cd8178098f00917CCc634728Eb3EeD164fac
+
+**Fhenix Destination**: 0x0D6Ae73E89865aD480E4D4bFA19CB064CE23f7a9
 
 
-2- Origin contract verification on block explorer for ease of use
+**_2- Origin contract verification on block explorer for ease of use_**
 
-3- Call createAd function with requird params and get dispatch id from internal tx
+**_3- Call createAd function with requird params and get dispatch id from internal tx_**
+
 0x9fbabb6b767e236f9df7cbfbf504dea6f4f1e933986e9f56da37e01356029903
 
 
-4- relay tx
+**_4- relay tx_**
+
 hyperlane status --relay --id 0x9fbabb6b767e236f9df7cbfbf504dea6f4f1e933986e9f56da37e01356029903 --origin scrollsepolia --destination fhenix --registry hyperlane-registry -k e42b7d55f7ed23b306518b1b2c25a6d68df1d664e80245d7c405af63585a5c88
 
 
 Message 0x9fbabb6b767e236f9df7cbfbf504dea6f4f1e933986e9f56da37e01356029903 was self-relayed!
 
-5- fhenix contract log kontrol ve byte decode
+**_5- fhenix contract log kontrol ve byte decode_**
+
 cast --calldata-decode 'Receiveeed(uint32,bytes32,uint,string)' 0x9952f6be000000000000000000000000000000000000000000000000000000000008274f0000000000000000000000002df1b5f1cba7555579a68b256222d0062e20058b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000050001010000000000000000000000000000000000000000000000000000000000
 
  cast sig 'Receiveeed(uint32,bytes32,uint,string)'
@@ -115,7 +121,9 @@ cast --calldata-decode 'Receiveeed(uint32,bytes32,uint,string)' 0x9952f6be000000
  cast --calldata-decode 'Receiveeed(uint32,bytes32,uint,string)' 0x9952f6be000000000000000000000000000000000000000000000000000000000008274f0000000000000000000000008b15e115bfaefc31402f595fe94d056da60423440000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000050100010100000000000000000000000000000000000000000000000000000000
 ----
 
-execution trace: cast run 0xbe21e5301255865b675b24928ec4071ed816d3a5e56b692559d9b2d0537a5183 --rpc-url https://rpc.ankr.com/scroll_sepolia_testnet
+**execution trace**
+
+cast run 0xbe21e5301255865b675b24928ec4071ed816d3a5e56b692559d9b2d0537a5183 --rpc-url https://rpc.ankr.com/scroll_sepolia_testnet
 
 
 
